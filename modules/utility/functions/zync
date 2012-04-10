@@ -1,0 +1,24 @@
+#
+# RSyncs zsh config to remote server
+#
+# Authors:
+#   John Long <machinist@asceth.com>
+#
+# Notes:
+#   I use rsync as that is probably more available than git
+#   on remote servers.
+#
+
+
+function zync {
+  (( $# == 0 )) && set -- *
+  if [[ "$OSTYPE" == linux* ]]; then
+    rsync -trhLk ~/.zshrc $@:
+    rsync -trhLk ~/.oh-my-zsh $@:
+  else
+    echo "zync is not supported on osx yet."
+  fi
+}
+
+zync "$@"
+
