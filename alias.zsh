@@ -66,6 +66,7 @@ alias po='popd'
 alias pu='pushd'
 alias rake='noglob rake'
 alias rm='nocorrect rm -i'
+alias rmm='nocorrect rm -f' # For when you know you want to rm
 alias scp='nocorrect scp'
 alias type='type -a'
 

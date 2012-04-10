@@ -26,6 +26,9 @@ if (( $+commands[yaourt] )); then
   # Install specific package(s) not from the repositories but from a file .
   alias yains='yaourt -U'
 
+  # Download specific package(s) PKGBUILD.
+  alias yainf='yaourt -G'
+
   # Remove the specified package(s), retaining its configuration(s) and required dependencies.
   alias yare='yaourt -R'
 

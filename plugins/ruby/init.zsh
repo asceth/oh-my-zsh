@@ -30,12 +30,12 @@ fi
 # Aliases
 alias b='bundle'
 alias be='b exec'
-alias bi='b install --path vendor/bundle'
+alias bi='b install'
 alias bl='b list'
 alias bo='b open'
 alias bp='b package'
 alias bu='b update'
-alias bI='bi \
+alias bI='bi --path vendor/bundle \
   && b package \
   && print .bundle       >>! .gitignore \
   && print vendor/bundle >>! .gitignore \
