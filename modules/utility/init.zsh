@@ -10,40 +10,37 @@
 # Serves a directory via HTTP.
 alias http-serve='python -m SimpleHTTPServer'
 
+# Displays user owned processes status.
+alias pmine='ps -U "$USER" -o pid,%cpu,%mem,command'
+
 # Makes a directory and changes to it.
 function mkdcd {
-  [[ -n "$1" ]] && mkdir -p "$1" && cd "$1"
+  [[ -n "$1" ]] && mkdir -p "$1" && builtin cd "$1"
 }
-compdef _mkdir mkdcd 2> /dev/null
+compdef '_path_files -/' mkdcd 2> /dev/null
 
 # Changes to a directory and lists its contents.
-function cdll {
-  builtin cd "$1" && ll
+function cdls {
+  builtin cd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
-compdef _cd cdll 2> /dev/null
+compdef _cd cdls 2> /dev/null
 
 # Pushes an entry onto the directory stack and lists its contents.
-function pushdll {
-  builtin pushd "$1" && ll
+function pushdls {
+  builtin pushd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
-compdef _cd pushdll 2> /dev/null
+compdef _cd pushdls 2> /dev/null
 
 # Pops an entry off the directory stack and lists its contents.
-function popdll {
-  builtin popd "$1" && ll
+function popdls {
+  builtin popd "$argv[-1]" && ls "${(@)argv[1,-2]}"
 }
-compdef _cd popdll 2> /dev/null
+compdef _cd popdls 2> /dev/null
 
 # Prints columns 1 2 3 ... n.
 function slit {
-  awk "{ print $(for n; do print -n "\$$n,"; done | sed 's/,$//') }"
+  awk "{ print ${(j:,:):-\$${^@}} }"
 }
-
-# Displays user owned process status.
-function pmine {
-  ps "$@" -U "$USER" -o pid,%cpu,%mem,command
-}
-compdef _ps pmine 2> /dev/null
 
 # Finds files and executes a command on them.
 function find-exec {
