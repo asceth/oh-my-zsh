@@ -64,6 +64,10 @@ else
   alias arch-upgrade='sudo pacman -Syu'
 fi
 
+if (( $+commands[pacman-color] )); then
+  alias pacman='pacman-color'
+fi
+
 # Pacman Aliases
 # Synchronize with repositories before upgrading packages that are out of date on the local system.
 alias pacupg='sudo pacman -Syu'
